@@ -1,0 +1,36 @@
+# Virtual Environment
+1-foundations-langchain/my_env/
+**/my_env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Output files
+*.out
+*.png
+*.jpg
+*.gif
+*.svg
+
+# Temporary files
+*.tmp
+*.temp
