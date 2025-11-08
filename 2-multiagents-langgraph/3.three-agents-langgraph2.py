@@ -51,6 +51,9 @@ gemini = ChatGoogleGenerativeAI(
     temperature=0.3
 )
 
+
+
+
 #4.2 Summarize tool
 @tool
 def summarize_tool(text: str) -> str:
