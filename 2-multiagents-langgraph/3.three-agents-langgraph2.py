@@ -49,10 +49,7 @@ gemini = ChatGoogleGenerativeAI(
     model='gemini-2.5-flash',
     google_api_key=GOOGLE_API_KEY,
     temperature=0.3
-)
-
-
-
+).bind_tools(tools)  # Bind tools to the model for agent functionality
 
 #4.2 Summarize tool
 @tool
