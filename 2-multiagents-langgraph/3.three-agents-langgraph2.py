@@ -70,7 +70,7 @@ search_tool = DuckDuckGoSearchRun()
 wikipedia_tool = wikipedia_tool
 tools = [search_tool, wikipedia_tool, summarize_tool]
 
-#gemini = gemini.bind_tools(tools) # Bind tools to the model for agent functionality...
+gemini = gemini.bind_tools(tools) # Bind tools to the model for agent functionality...
 
 
 #5. Define Agents
