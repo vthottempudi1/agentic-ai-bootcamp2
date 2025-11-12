@@ -1,5 +1,5 @@
 import os
-from typing import TypedDict, Annotated
+from typing import Optional, TypedDict, Annotated
 from dotenv import load_dotenv
 from wikipedia import summary as wiki_summary
 from langchain_community.tools import DuckDuckGoSearchRun
@@ -25,6 +25,9 @@ class WorkflowState(TypedDict, total=False):
     summary: Annotated[str, 'LLM-generated summary']
     summary_formatted: Annotated[str, 'formatted summary with bullet points']
 
+
+
+
 #4.Define Tools
 #4.1 Wikipedia tool
 @tool
@@ -49,7 +52,7 @@ gemini = ChatGoogleGenerativeAI(
     model='gemini-2.5-flash',
     google_api_key=GOOGLE_API_KEY,
     temperature=0.3
-).bind_tools(tools)  # Bind tools to the model for agent functionality
+)#.bind_tools(tools)  # Bind tools to the model for agent functionality
 
 #4.2 Summarize tool
 @tool
@@ -63,8 +66,12 @@ def summarize_tool(text: str) -> str:
     chain = prompt | gemini
     out = chain.invoke({'context': text})
     return out.content
-#search_tool = DuckDuckGoSearchRun()
-tools = [wikipedia_tool, summarize_tool]
+search_tool = DuckDuckGoSearchRun()
+wikipedia_tool = wikipedia_tool
+tools = [search_tool, wikipedia_tool, summarize_tool]
+
+#gemini = gemini.bind_tools(tools) # Bind tools to the model for agent functionality...
+
 
 #5. Define Agents
 #5.1 Reserch Agent
@@ -121,7 +128,7 @@ Keep each point informative and concise.''')
     
     chain = prompt | gemini
     formatted_output = chain.invoke({"summary": summary, "query": query})
-    state["summary_formatted"] = formatted_output.content.strip()
+    state["summary_formatted"] = formatted_output.content.strip() #str(formatted_output).strip()
     print(f"Formatter Agent: Bullet point summary created")
     return state
 
@@ -162,5 +169,5 @@ if __name__ == "__main__":
 
 
 
-
+##python 3.three-agents-langgraph2.py
 
